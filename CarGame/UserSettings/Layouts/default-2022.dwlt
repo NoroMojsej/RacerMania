@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 98
+  controlID: 94
   draggingID: 0
 --- !u!114 &3
 MonoBehaviour:
@@ -324,7 +324,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -332,16 +332,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\luzak\Desktop\CarGame\CarGame
+  m_LastProjectPath: C:\Users\luzak\Documents\IT\RacerMania\RacerMania\CarGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c8590000
-    m_LastClickedID: 22984
-    m_ExpandedIDs: 00000000c859000000ca9a3bffffff7f
+    m_SelectedIDs: ca590000
+    m_LastClickedID: 22986
+    m_ExpandedIDs: 00000000c259000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,7 +369,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000c2590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -511,7 +511,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 18fbffff
+      m_ExpandedIDs: 1cf9ffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -930,16 +930,16 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.356842, y: -7.432956, z: 7.7897654}
+    m_Target: {x: 3.379414, y: -6.925853, z: 7.781265}
     speed: 2
-    m_Value: {x: -2.356842, y: -7.432956, z: 7.7897654}
+    m_Value: {x: 3.379414, y: -6.925853, z: 7.781265}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
     name: Shaded
     section: Shading Mode
   m_ValidateTrueMetals: 0
-  m_DoValidateTrueMetals: 0
+  m_DoValidateTrueMetals: 1
   m_SceneViewState:
     m_AlwaysRefresh: 0
     showFog: 1
@@ -970,7 +970,7 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -978,9 +978,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.27047467, y: -0.077880055, z: 0.02195826, w: 0.95932263}
+    m_Target: {x: -0.25504303, y: -0.32875353, z: 0.09268843, w: -0.90458846}
     speed: 2
-    m_Value: {x: 0.27044094, y: -0.0793188, z: 0.022363905, w: 0.9592029}
+    m_Value: {x: -0.25368622, y: -0.32889265, z: 0.092195325, w: -0.90497124}
   m_Size:
     m_Target: 13.444108
     speed: 2
@@ -1002,7 +1002,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: -0.15317497, y: 0.5116228, z: -0.0932647, w: -0.84028953}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
