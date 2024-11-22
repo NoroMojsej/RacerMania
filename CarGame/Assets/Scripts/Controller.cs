@@ -11,15 +11,14 @@ public class Controller : MonoBehaviour
     public GameObject[] wheelsMesh = new GameObject[4];
     public GameObject centerOfMass;
     private Rigidbody rigidbody;
-    public float KPH;
+    public float speed;
+    public float maxSpeed = 80;
     public float brakePower = 100000000;
     private float radius = 6f;
     public float DownForceValue = 100;
     public float motorTorque = 1000;
-    public float steeringMax = 20;
-
-    private float wheelsRPM;
-
+    
+ 
     void Start()
     {
         getObjects();
@@ -36,12 +35,24 @@ public class Controller : MonoBehaviour
 
     private void moveVehicle()
     {
-        for (int i = 0; i < wheels.Length; i++)
+        if (speed < maxSpeed)
         {
-            wheels[i].motorTorque = inputManager.vertical * (motorTorque/4);
+            // Apply motor torque only if below max speed
+            for (int i = 0; i < wheels.Length; i++)
+            {
+                wheels[i].motorTorque = inputManager.vertical * (motorTorque/4);
+            }
+        }
+        else
+        {
+            // Prevent additional torque if max speed is reached
+            for (int i = 0; i < wheels.Length; i++)
+            {
+                wheels[i].motorTorque = 0;
+            }
         }
         
-        KPH = rigidbody.velocity.magnitude * 3.6f;
+        speed = rigidbody.velocity.magnitude * 3.6f;
 
         if (inputManager.handbrake)
         {
