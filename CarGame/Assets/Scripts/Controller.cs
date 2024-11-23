@@ -72,14 +72,21 @@ public class Controller : MonoBehaviour
         if (inputManager.horizontal > 0 ) 
         {
             //rear tracks size is set to 1.5f       wheel base has been set to 2.55f
-            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * inputManager.horizontal;
-            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * inputManager.horizontal;
+            /*wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * inputManager.horizontal;
+            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * inputManager.horizontal;*/
+            
+            //rear track size 5f wheel base 10f
+            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(10f / (radius + (5f / 2))) * inputManager.horizontal;
+            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(10f / (radius - (5f / 2))) * inputManager.horizontal;
         } 
         else if (inputManager.horizontal < 0 ) 
         {                                                          
-            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * inputManager.horizontal;
-            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * inputManager.horizontal;
+            /*wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * inputManager.horizontal;
+            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * inputManager.horizontal;*/
             //transform.Rotate(Vector3.up * steerHelping);
+            
+            wheels[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(10f / (radius - (5f / 2))) * inputManager.horizontal;
+            wheels[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(10f / (radius + (5f / 2))) * inputManager.horizontal;
 
         } 
         else 
