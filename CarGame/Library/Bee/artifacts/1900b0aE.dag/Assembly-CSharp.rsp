@@ -359,6 +359,8 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/gizmos.cs"
 "Assets/Scripts/InputManager.cs"
+"Assets/Scripts/PickUp/PickUpBlue.cs"
+"Assets/Scripts/PickUp/PickUpGreen.cs"
 -langversion:9.0
 /deterministic
 /optimize+

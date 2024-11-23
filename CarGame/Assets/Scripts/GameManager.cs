@@ -29,4 +29,9 @@ public class GameManager : MonoBehaviour
         float temp = vehicleSpeed/100;
         needle.transform.eulerAngles = new Vector3(0, 0, (startPosition - temp * desiredPosition));
     }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, Screen.width/5, Screen.height/6),"MONEY: "  +PlayerPrefs.GetFloat("Money"));
+    }
 }

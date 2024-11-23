@@ -11421,7 +11421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e40386469b26d444b5f049108cd772e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  driveController: 0
+  driveController: 1
   distanceOffset: 3
   sterrForce: 1
   vertical: 0

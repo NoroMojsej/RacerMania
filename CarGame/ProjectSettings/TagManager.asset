@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Path
+  - PickUpGreen
+  - PickUpBlue
+  - NPC
   layers:
   - Default
   - TransparentFX
