@@ -356,6 +356,8 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.47f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/AI/trackWaypoints.cs"
 "Assets/Scripts/CarEngineSound.cs"
+"Assets/Scripts/CoinPickUp.cs"
+"Assets/Scripts/CoinRotation.cs"
 "Assets/Scripts/Controller.cs"
 "Assets/Scripts/FinishLine.cs"
 "Assets/Scripts/GameManager.cs"

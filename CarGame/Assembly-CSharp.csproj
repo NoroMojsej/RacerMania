@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\PickUp\PickUpBlue.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\CoinPickUp.cs" />
+    <Compile Include="Assets\Scripts\CoinRotation.cs" />
     <Compile Include="Assets\Scripts\AI\trackWaypoints.cs" />
     <Compile Include="Assets\Scripts\PickUp\PickUpGreen.cs" />
     <Compile Include="Assets\Scripts\FinishLine.cs" />

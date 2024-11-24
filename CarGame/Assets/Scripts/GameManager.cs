@@ -1,35 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Controller car;           // Reference to the player's car
-    public GameObject needle;        // Reference to the needle for the speedometer
+    public Controller car;              // Reference to the player's car
+    public GameObject needle;           // Reference to the needle for the speedometer
+    public TextMeshProUGUI timerText;   // Reference to the Timer UI TextMeshPro component
+    public TextMeshProUGUI scoreText;
     private float startPosition = 227f, endPosition = -52.5f, desiredPosition;
     public float vehicleSpeed;
-    
+
     private bool raceStarted = false;
     private bool raceEnded = false;
 
+    private float raceTimer = 0f;       // Timer to track the race duration
+    private int score = 0;             // Player's score
+
     void Start()
     {
-        // Initialize any race variables if needed
+        raceTimer = 0f;                 
+        timerText.text = "Time: 0.00s"; 
+        score = 0;                     // Initialize score
+        scoreText.text = "Score: 0";   // Update UI
     }
 
-    // Update is called once per frame
+// Method to add score
+    public void AddScore(int value)
+    {
+        score += value;                 // Update the score
+        scoreText.text = $"Score: {score}"; // Update score display
+    }
+
     private void FixedUpdate()
     {
         vehicleSpeed = car.speed;
         updateNeedle();
-        
+
         if (raceStarted && !raceEnded)
         {
-            // Additional logic for ongoing race, e.g., updating race timers or UI
+            raceTimer += Time.deltaTime; // Increment the timer
+            timerText.text = $"Time: {raceTimer:F2}s"; // Update timer display
         }
     }
 
-    // Update the speedometer needle position
     public void updateNeedle()
     {
         desiredPosition = startPosition - endPosition;
@@ -37,30 +50,23 @@ public class GameManager : MonoBehaviour
         needle.transform.eulerAngles = new Vector3(0, 0, (startPosition - temp * desiredPosition));
     }
 
-    // Start the race
     public void StartRace()
     {
         if (!raceStarted)
         {
             raceStarted = true;
-            Debug.Log("Race Started!");
-            // Additional start logic, like starting the timer or enabling UI elements
+            raceTimer = 0f;           // Reset timer when the race starts
+            timerText.text = "Time: 0.00s"; // Reset UI text
         }
     }
 
-    // End the race
     public void EndRace()
     {
         if (!raceEnded)
         {
             raceEnded = true;
-            Debug.Log("Race Ended!");
-            // Additional end race logic, like showing results or stopping the timer
+            Debug.Log($"Race Ended! Total Time: {raceTimer:F2} seconds");
+            timerText.text = $"Final Time: {raceTimer:F2}s";
         }
-    }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, Screen.width/5, Screen.height/6), "MONEY: " + PlayerPrefs.GetFloat("Money"));
     }
 }
