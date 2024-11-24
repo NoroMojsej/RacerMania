@@ -77,7 +77,15 @@ public class InputManager : MonoBehaviour
             {
 
                 previousWaypoint = currentWaypoint;
-                currentWaypoint = nodes[i + distanceOffset];
+                
+                if (i + distanceOffset >= nodes.Count)
+                {
+                    currentWaypoint = nodes[0];
+                }
+                else
+                {
+                    currentWaypoint = nodes[i + distanceOffset];
+                }
                 distance = currentDistance;
                 
             }
