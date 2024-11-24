@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\AI\trackWaypoints.cs" />
     <Compile Include="Assets\Scripts\PickUp\PickUpGreen.cs" />
+    <Compile Include="Assets\Scripts\FinishLine.cs" />
     <Compile Include="Assets\Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\gizmos.cs" />
   </ItemGroup>

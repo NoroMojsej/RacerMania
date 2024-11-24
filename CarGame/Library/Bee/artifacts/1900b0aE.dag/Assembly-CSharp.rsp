@@ -357,6 +357,7 @@
 "Assets/Scripts/AI/trackWaypoints.cs"
 "Assets/Scripts/CarEngineSound.cs"
 "Assets/Scripts/Controller.cs"
+"Assets/Scripts/FinishLine.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/gizmos.cs"
 "Assets/Scripts/InputManager.cs"
