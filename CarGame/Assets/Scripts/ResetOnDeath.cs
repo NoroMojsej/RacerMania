@@ -3,7 +3,9 @@ using UnityEngine;
 public class ResetOnDeath : MonoBehaviour
 {
     // Reference to the player's start position
+    
     private Vector3 initialPlayerPosition;
+    public Transform currentWaypoint;
 
     private void Start()
     {
@@ -16,6 +18,8 @@ public class ResetOnDeath : MonoBehaviour
         // Check if the object colliding with the DeathZone is the player
         if (other.CompareTag("Player"))
         {
+            //Debug.Log("fghjfgjfjgj");
+            initialPlayerPosition = other.GetComponent<InputManager>().previousWaypoint.transform.position;
             ResetPlayer(other.gameObject);
         }
     }
@@ -24,6 +28,7 @@ public class ResetOnDeath : MonoBehaviour
     {
         // Reset the player's position to the initial position
         player.transform.position = initialPlayerPosition;
+        //player.transform.position = currentWaypoint.position;
 
         // Optionally, reset velocity if the player has a Rigidbody
         Rigidbody rb = player.GetComponent<Rigidbody>();

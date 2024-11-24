@@ -118,6 +118,14 @@ public class Controller : MonoBehaviour
                 wheel.sidewaysFriction = friction;
             }
         }
+        
+        if (inputManager.reset)
+        {
+            transform.position = inputManager.previousWaypoint.position;
+
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
     }
 
     private void steerVehicle()

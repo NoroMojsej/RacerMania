@@ -19,10 +19,12 @@ public class InputManager : MonoBehaviour
     public float vertical;
     public float horizontal;
     public bool handbrake;
+    public bool reset;
     
     public trackWaypoints waypoints;
     public List<Transform> nodes;
     public Transform currentWaypoint;
+    public Transform previousWaypoint;
     
     private void Start()
     {
@@ -56,9 +58,12 @@ public class InputManager : MonoBehaviour
     
     private void userDrive()
     {
+        calculateDistanceOfWaypoints();
+        
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
         handbrake = (Input.GetAxis("Jump") != 0)? true : false;
+        reset = Input.GetKey("r");
     }
     
     private void calculateDistanceOfWaypoints() {
@@ -68,8 +73,10 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < nodes.Count; i++) {
             Vector3 difference = nodes[i].transform.position - position;
             float currentDistance = difference.magnitude;
-            if (currentDistance < distance) {
-                
+            if (currentDistance < distance)
+            {
+
+                previousWaypoint = currentWaypoint;
                 currentWaypoint = nodes[i + distanceOffset];
                 distance = currentDistance;
                 
