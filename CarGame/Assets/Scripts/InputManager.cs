@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private driver driveController;
     
     [Range (0,10)]public int distanceOffset = 1;
-    [Range (0,5)]public float sterrForce = 1;
+    [Range (0,5)]public float sterrForce = 2;
     
     public float vertical;
     public float horizontal;
@@ -49,7 +49,8 @@ public class InputManager : MonoBehaviour
     private void AIDrive()
     {
         calculateDistanceOfWaypoints();
-        vertical = .3f;
+        //vertical = .3f;
+        vertical = .6f;
         AISteer();
     }
     

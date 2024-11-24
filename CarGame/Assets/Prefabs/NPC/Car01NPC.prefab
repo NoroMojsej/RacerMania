@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   driveController: 0
   distanceOffset: 1
-  sterrForce: 1
+  sterrForce: 2
   vertical: 0
   horizontal: 0
   handbrake: 0
