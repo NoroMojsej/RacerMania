@@ -5015,6 +5015,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 1.109139e-10
       objectReference: {fileID: 0}
+    - target: {fileID: 4794750168549976343, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: distanceOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5129961988221753881, guid: a39201c0530134c45a15979b8beaa930, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32432747
@@ -5074,6 +5078,10 @@ PrefabInstance:
     - target: {fileID: 6925966846858428520, guid: a39201c0530134c45a15979b8beaa930, type: 3}
       propertyPath: m_Name
       value: Car01Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: steeringMax
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

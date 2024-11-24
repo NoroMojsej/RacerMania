@@ -166,6 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05af189f725a1e347a5cf5f8fb57ba18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &63009178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5535846307830061669, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+  m_PrefabInstance: {fileID: 740999402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &104341336
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +337,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cd0910f21ceb4e4ba0b2c4c5b03eaea, type: 3}
+--- !u!1 &208263453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 526494928476357695, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
+  m_PrefabInstance: {fileID: 3008652493922913082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &657288936
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1356826795018575502, guid: a39201c0530134c45a15979b8beaa930, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: -1.099
       objectReference: {fileID: 0}
     - target: {fileID: 1356826795018575502, guid: a39201c0530134c45a15979b8beaa930, type: 3}
       propertyPath: m_LocalPosition.z
@@ -639,7 +649,23 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: brakePower
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
       propertyPath: motorTorque
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: steeringMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: centerOfMass
+      value: 
+      objectReference: {fileID: 63009178}
+    - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
+      propertyPath: DownForceValue
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7977766023966106705, guid: a39201c0530134c45a15979b8beaa930, type: 3}
@@ -1702,6 +1728,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969501992}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2128342140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8167349122838579091, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
+  m_PrefabInstance: {fileID: 1756935026917315513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2129219139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2887497565823232476, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 2887497565823232476, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1809,6 +1840,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
+      propertyPath: brakePower
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
+      propertyPath: steeringMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
+      propertyPath: centerOfMass
+      value: 
+      objectReference: {fileID: 2128342140}
+    - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
+      propertyPath: DownForceValue
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1822,6 +1869,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1960186490312950692, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
+      propertyPath: brakePower
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960186490312950692, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
+      propertyPath: steeringMax
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960186490312950692, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
+      propertyPath: centerOfMass
+      value: 
+      objectReference: {fileID: 208263453}
+    - target: {fileID: 1960186490312950692, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
+      propertyPath: DownForceValue
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4841919294898525436, guid: 2a1aa7ebef5b66f42a40036d0c13349f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -61.071796

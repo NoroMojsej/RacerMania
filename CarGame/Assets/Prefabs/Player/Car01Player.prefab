@@ -10665,7 +10665,7 @@ Transform:
   m_GameObject: {fileID: 4633909007069656578}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08248056, y: 0.00000004357822, z: -0.0000000036066448, w: 0.9965927}
-  m_LocalPosition: {x: 21.16, y: 14.243, z: -27.09}
+  m_LocalPosition: {x: 21.16, y: 9.148001, z: -27.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11452,12 +11452,13 @@ MonoBehaviour:
   - {fileID: 3698391367515456924}
   - {fileID: 4991166381793962654}
   - {fileID: 6438215137005316765}
-  centerOfMass: {fileID: 0}
+  centerOfMass: {fileID: 5535846307830061669}
   speed: 0
   maxSpeed: 80
-  brakePower: 100000000
-  DownForceValue: 100
+  brakePower: 3000
+  DownForceValue: 1000
   motorTorque: 1000
+  steeringMax: 5
 --- !u!1 &7073365199410218251
 GameObject:
   m_ObjectHideFlags: 0

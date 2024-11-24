@@ -380,12 +380,13 @@ MonoBehaviour:
   - {fileID: 7648130750926056416}
   - {fileID: 1918553123487798528}
   - {fileID: 8537982611798563058}
-  centerOfMass: {fileID: 0}
+  centerOfMass: {fileID: 8167349122838579091}
   speed: 0
   maxSpeed: 80
-  brakePower: 100000000
-  DownForceValue: 100
+  brakePower: 3000
+  DownForceValue: 1000
   motorTorque: 1000
+  steeringMax: 5
 --- !u!1 &2614563072936179425
 GameObject:
   m_ObjectHideFlags: 0
