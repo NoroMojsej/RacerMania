@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 C:\Users\fajli\Unity\RacerMania\CarGame
+=======
+D:\Unity_projekt\RacerMania\CarGame
+>>>>>>> Stashed changes
