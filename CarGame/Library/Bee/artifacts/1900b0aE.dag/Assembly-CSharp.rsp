@@ -361,7 +361,6 @@
 "Assets/Scripts/InputManager.cs"
 "Assets/Scripts/PickUp/PickUpBlue.cs"
 "Assets/Scripts/PickUp/PickUpGreen.cs"
-"Assets/Scripts/ResetOnDeath.cs"
 -langversion:9.0
 /deterministic
 /optimize+
