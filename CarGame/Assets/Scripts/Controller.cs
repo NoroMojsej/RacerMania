@@ -18,11 +18,16 @@ public class Controller : MonoBehaviour
     public float DownForceValue = 1000;
     public float motorTorque = 1000;
     public float steeringMax = 5;
+
+    // How many times car crossed finnish line
+    public int finishLineCrossCount = 0;
+    public bool hasFinished = false;
     
  
     void Start()
     {
         getObjects();
+        
     }
 
     private void FixedUpdate()
@@ -33,6 +38,7 @@ public class Controller : MonoBehaviour
         steerVehicle();
         adjustFriction();
     }
+    
     
 
     private void moveVehicle()
@@ -197,6 +203,8 @@ public class Controller : MonoBehaviour
             wheel.sidewaysFriction = sidewaysFriction;
         }
     }
+
+
 
     void animateWheels()
     {
