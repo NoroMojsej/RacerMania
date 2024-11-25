@@ -10,10 +10,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Controller car;         
+    public Controller car;
     public GameObject carObject;
-    public GameObject needle;          
-    public TextMeshProUGUI timerText; 
+    public GameObject needle;
+    public TextMeshProUGUI timerText;
     public TextMeshProUGUI scoreText;
     private float startPosition = 223f, endPosition = -52.5f, desiredPosition;
     public float vehicleSpeed;
@@ -21,32 +21,37 @@ public class GameManager : MonoBehaviour
     private bool lapStarted = false;
     private bool lapEnded = false;
 
-    private float raceTimer = 0f;  
-    private int score = 0;    
-    
-    public int countdownTime = 3; // Počiatočný čas na odpočítavanie (v sekundách)
-    public TextMeshProUGUI countdownText;    // Odkaz na Text UI prvok
+    private float raceTimer = 0f;
+    private int score = 0;
+
+    public int countdownTime = 3;
+    public TextMeshProUGUI countdownText;
 
     public List<Controller> carControllers;
     private GameObject[] carObjects;
     public List<Vehicle> vehicles;
     public int currentPosition;
     public TextMeshProUGUI positionText;
-    
+
     public List<GameObject> allCars;
 
     private DatabaseReference databaseReference;
 
+    // Single TextMeshPro for showing the final results
+    public TextMeshProUGUI finalResultText;
+    public Button restartButton;
+    public Button toMenu;
+
     void Start()
     {
-        InitializeFirebase(); // Initializuje Firebase
+        InitializeFirebase();
 
         SetCarLists();
-        
-        raceTimer = 0f;                 
-        timerText.text = "Time: 0.00s"; 
-        score = 0;                     // Initialize score
-        scoreText.text = "Score: 0";   // Update UI
+
+        raceTimer = 0f;
+        timerText.text = "Time: 0.00s";
+        score = 0;
+        scoreText.text = "Score: 0";
 
         StartCoroutine(StartCountdown());
         StartCoroutine(SortVehiclesTimedLoop());
@@ -54,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeFirebase()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => 
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Result == DependencyStatus.Available)
             {
@@ -74,20 +79,18 @@ public class GameManager : MonoBehaviour
         carControllers = new List<Controller>();
         vehicles = new List<Vehicle>();
         carObject = GameObject.FindWithTag("Player");
-        
+
         carControllers.Add(car);
         allCars = new List<GameObject>();
         allCars.Add(carObject);
         vehicles.Add(new Vehicle(carObject.GetComponent<InputManager>().passedWaypoints, car.name, car.hasFinished, true));
-        
-        // Nájde všetky GameObjecty s daným tagom
+
         carObjects = GameObject.FindGameObjectsWithTag("NPC");
 
-        // Prejdi cez nájdené objekty
         foreach (GameObject obj in carObjects)
         {
             carControllers.Add(obj.gameObject.GetComponent<Controller>());
-            vehicles.Add(new Vehicle(obj.GetComponent<InputManager>().passedWaypoints, obj.gameObject.GetComponent<Controller>().name, 
+            vehicles.Add(new Vehicle(obj.GetComponent<InputManager>().passedWaypoints, obj.gameObject.GetComponent<Controller>().name,
                 obj.gameObject.GetComponent<Controller>().hasFinished, false));
             allCars.Add(obj);
         }
@@ -95,7 +98,8 @@ public class GameManager : MonoBehaviour
 
     private void SortVehicles()
     {
-        for (int i = 0; i < allCars.Count; i++) {
+        for (int i = 0; i < allCars.Count; i++)
+        {
             vehicles[i].hasFinished = allCars[i].GetComponent<Controller>().hasFinished;
             vehicles[i].name = allCars[i].GetComponent<Controller>().name;
             vehicles[i].passedWaypoints = allCars[i].GetComponent<InputManager>().passedWaypoints;
@@ -108,15 +112,18 @@ public class GameManager : MonoBehaviour
                 vehicles[i].isPlayer = false;
             }
         }
-        
-        for (int i = 0; i < vehicles.Count; i++) {
-            for (int j = i + 1; j < vehicles.Count; j++) {
-                if (vehicles[j].passedWaypoints < vehicles[i].passedWaypoints) {
+
+        for (int i = 0; i < vehicles.Count; i++)
+        {
+            for (int j = i + 1; j < vehicles.Count; j++)
+            {
+                if (vehicles[j].passedWaypoints < vehicles[i].passedWaypoints)
+                {
                     Vehicle QQ = vehicles[i];
                     vehicles[i] = vehicles[j];
                     vehicles[j] = QQ;
                 }
-            }                
+            }
         }
 
         for (int i = 0; i < vehicles.Count; i++)
@@ -124,11 +131,11 @@ public class GameManager : MonoBehaviour
             if (vehicles[i].isPlayer)
             {
                 currentPosition = vehicles.Count - i;
-                positionText.text = currentPosition + "/" + vehicles.Count; 
+                positionText.text = currentPosition + "/" + vehicles.Count;
             }
         }
     }
-    
+
     private IEnumerator SortVehiclesTimedLoop()
     {
         while (true)
@@ -148,8 +155,8 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int value)
     {
-        score += value;                 // updatne skóre
-        scoreText.text = $"Score: {score}"; // updatne displej
+        score += value;
+        scoreText.text = $"Score: {score}";
     }
 
     private void FixedUpdate()
@@ -162,8 +169,8 @@ public class GameManager : MonoBehaviour
     {
         if (lapStarted && !lapEnded)
         {
-            raceTimer += Time.deltaTime; // Incrementuje timer
-            timerText.text = $"Time: {raceTimer:F2}s"; // Updatne displej
+            raceTimer += Time.deltaTime;
+            timerText.text = $"Time: {raceTimer:F2}s";
         }
     }
 
@@ -173,25 +180,25 @@ public class GameManager : MonoBehaviour
         float temp = vehicleSpeed / 100;
         needle.transform.eulerAngles = new Vector3(0, 0, (startPosition - temp * desiredPosition));
     }
-    
+
     IEnumerator StartCountdown()
     {
         while (countdownTime > 0)
         {
-            countdownText.text = countdownTime.ToString(); // Zobraz aktuálny čas
-            yield return new WaitForSeconds(1);           // Počkaj 1 sekundu
-            countdownTime--;                              // Zníž čas o 1
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSeconds(1);
+            countdownTime--;
         }
-        
+
         EnableControllers();
         StartCoroutine(GoTextCountdown());
     }
-    
+
     IEnumerator GoTextCountdown()
     {
-        countdownText.text = "GO!"; 
-        yield return new WaitForSeconds(1); 
-        countdownText.text = "";                       
+        countdownText.text = "GO!";
+        yield return new WaitForSeconds(1);
+        countdownText.text = "";
     }
 
     public void StartLap()
@@ -199,7 +206,7 @@ public class GameManager : MonoBehaviour
         if (!lapStarted)
         {
             lapStarted = true;
-            raceTimer = 0f;           
+            raceTimer = 0f;
             timerText.text = "Time: 0.00s";
         }
     }
@@ -211,9 +218,38 @@ public class GameManager : MonoBehaviour
             lapEnded = true;
             timerText.text = $"Final Time: {raceTimer:F2}s";
 
-            // Uloží na firebase
+            // Show the final result directly without a panel
+            ShowFinalResult();
+
+            // Save the race data to Firebase
             SaveRaceData(SceneManager.GetActiveScene().name, score, raceTimer);
         }
+    }
+
+    private void ShowFinalResult()
+    {
+        // Format the final result text
+        finalResultText.text = $"Final Time: {raceTimer:F2}s\n" +
+                               $"Score: {score}\n" +
+                               $"Position: {currentPosition}/{vehicles.Count}";
+
+        // Optionally hide other UI elements such as the timer and score
+        timerText.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+
+        // Optionally enable the restart button
+        restartButton.gameObject.SetActive(true);
+        toMenu.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void SaveRaceData(string level, int score, float time)
@@ -224,7 +260,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        string userId = System.Guid.NewGuid().ToString(); 
+        string userId = System.Guid.NewGuid().ToString();
 
         Dictionary<string, object> raceData = new Dictionary<string, object>
         {
