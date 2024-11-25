@@ -34,12 +34,12 @@ public class FinishLine : MonoBehaviour
             if (other.CompareTag("Player") && other.GetComponent<Controller>().finishLineCrossCount == 1)
             {
                 Debug.Log("Race started for player.");
-                gameManager.StartRace();
+                gameManager.StartLap();
             }
             if (other.CompareTag("Player") && other.GetComponent<Controller>().finishLineCrossCount == finishLineCrossCount)
             {
                 Debug.Log("Race ended for player.");
-                gameManager.EndRace();
+                gameManager.EndLap();
             }
         }
     }

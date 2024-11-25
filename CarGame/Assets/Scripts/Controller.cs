@@ -22,6 +22,7 @@ public class Controller : MonoBehaviour
     // How many times car crossed finnish line
     public int finishLineCrossCount = 0;
     public bool hasFinished = false;
+    public bool isEnabled = false;
     
  
     void Start()
@@ -43,48 +44,24 @@ public class Controller : MonoBehaviour
 
     private void moveVehicle()
     {
-        /*if (speed < maxSpeed)
+        if (isEnabled)
         {
-            // Apply motor torque only if below max speed
-            for (int i = 0; i < wheels.Length; i++)
+            if (speed < maxSpeed)
             {
-                wheels[i].motorTorque = inputManager.vertical * (motorTorque/4);
+                // Apply motor torque only to the rear wheels for better control
+                wheels[2].motorTorque = inputManager.vertical * motorTorque / 2; // Rear-right
+                wheels[3].motorTorque = inputManager.vertical * motorTorque / 2; // Rear-left
             }
-        }
-        else
-        {
-            // Prevent additional torque if max speed is reached
-            for (int i = 0; i < wheels.Length; i++)
+            else
             {
-                wheels[i].motorTorque = 0;
+                // Prevent additional torque if max speed is reached
+                foreach (WheelCollider wheel in wheels)
+                {
+                    wheel.motorTorque = 0;
+                }
             }
-        }*/
-        
-        if (speed < maxSpeed)
-        {
-            // Apply motor torque only to the rear wheels for better control
-            wheels[2].motorTorque = inputManager.vertical * motorTorque / 2; // Rear-right
-            wheels[3].motorTorque = inputManager.vertical * motorTorque / 2; // Rear-left
-        }
-        else
-        {
-            // Prevent additional torque if max speed is reached
-            foreach (WheelCollider wheel in wheels)
-            {
-                wheel.motorTorque = 0;
-            }
-        }
         
         speed = rigidbody.velocity.magnitude * 3.6f;
-
-        /*if (inputManager.handbrake)
-        {
-            wheels[3].brakeTorque = wheels[2].brakeTorque = brakePower;
-        }
-        else
-        {
-            wheels[3].brakeTorque = wheels[2].brakeTorque = 0;
-        }*/
         
         if (inputManager.handbrake)
         {
@@ -126,12 +103,14 @@ public class Controller : MonoBehaviour
         }
         
         if (inputManager.reset)
-        {
-            transform.position = inputManager.previousWaypoint.position;
+            {
+                transform.position = inputManager.previousWaypoint.position;
 
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
+                rigidbody.velocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+            } 
         }
+        
     }
 
     private void steerVehicle()
