@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Controller car;              // Reference to the player's car
+    public Controller car;         
     public GameObject carObject;
-    public GameObject needle;           // Reference to the needle for the speedometer
-    public TextMeshProUGUI timerText;   // Reference to the Timer UI TextMeshPro component
+    public GameObject needle;          
+    public TextMeshProUGUI timerText; 
     public TextMeshProUGUI scoreText;
     private float startPosition = 223f, endPosition = -52.5f, desiredPosition;
     public float vehicleSpeed;
@@ -18,8 +21,8 @@ public class GameManager : MonoBehaviour
     private bool lapStarted = false;
     private bool lapEnded = false;
 
-    private float raceTimer = 0f;       // Timer to track the race duration
-    private int score = 0;              // Player's score
+    private float raceTimer = 0f;  
+    private int score = 0;    
     
     public int countdownTime = 3; // Počiatočný čas na odpočítavanie (v sekundách)
     public TextMeshProUGUI countdownText;    // Odkaz na Text UI prvok
@@ -31,8 +34,13 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI positionText;
     
     public List<GameObject> allCars;
+
+    private DatabaseReference databaseReference;
+
     void Start()
     {
+        InitializeFirebase(); // Initializuje Firebase
+
         SetCarLists();
         
         raceTimer = 0f;                 
@@ -40,10 +48,25 @@ public class GameManager : MonoBehaviour
         score = 0;                     // Initialize score
         scoreText.text = "Score: 0";   // Update UI
 
-
         StartCoroutine(StartCountdown());
         StartCoroutine(SortVehiclesTimedLoop());
+    }
 
+    private void InitializeFirebase()
+    {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => 
+        {
+            if (task.Result == DependencyStatus.Available)
+            {
+                FirebaseApp app = FirebaseApp.DefaultInstance;
+                databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+                Debug.Log("Firebase initialized successfully.");
+            }
+            else
+            {
+                Debug.LogError($"Could not resolve Firebase dependencies: {task.Result}");
+            }
+        });
     }
 
     private void SetCarLists()
@@ -63,24 +86,19 @@ public class GameManager : MonoBehaviour
         // Prejdi cez nájdené objekty
         foreach (GameObject obj in carObjects)
         {
-            //Debug.Log("Found object: " + obj.name);
             carControllers.Add(obj.gameObject.GetComponent<Controller>());
-            
             vehicles.Add(new Vehicle(obj.GetComponent<InputManager>().passedWaypoints, obj.gameObject.GetComponent<Controller>().name, 
                 obj.gameObject.GetComponent<Controller>().hasFinished, false));
-            
             allCars.Add(obj);
         }
-        
     }
 
     private void SortVehicles()
     {
         for (int i = 0; i < allCars.Count; i++) {
             vehicles[i].hasFinished = allCars[i].GetComponent<Controller>().hasFinished;
-            vehicles[i].name = allCars[i].GetComponent<Controller> ().name;
-            vehicles[i].passedWaypoints = allCars[i].GetComponent<InputManager> ().passedWaypoints;
-            //vehicles[i].isPlayer = allCars[i].GetComponent<InputManager>().
+            vehicles[i].name = allCars[i].GetComponent<Controller>().name;
+            vehicles[i].passedWaypoints = allCars[i].GetComponent<InputManager>().passedWaypoints;
             if (allCars[i].GetComponent<InputManager>().driveController == InputManager.driver.User)
             {
                 vehicles[i].isPlayer = true;
@@ -103,22 +121,20 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < vehicles.Count; i++)
         {
-            //Debug.Log(i +" " +vehicles[i].passedWaypoints + " " + vehicles[i].name + " " + vehicles[i].hasFinished + " " +vehicles[i].isPlayer);
-
             if (vehicles[i].isPlayer)
             {
-                currentPosition = vehicles.Count-i;
+                currentPosition = vehicles.Count - i;
                 positionText.text = currentPosition + "/" + vehicles.Count; 
             }
         }
-
-        //Debug.Log("---------------------------------------------------------------");
     }
     
-    private IEnumerator SortVehiclesTimedLoop () {
-        while (true) {
-            yield return new WaitForSeconds (1);
-            SortVehicles ();
+    private IEnumerator SortVehiclesTimedLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            SortVehicles();
         }
     }
 
@@ -130,11 +146,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Method to add score
     public void AddScore(int value)
     {
-        score += value;                 // Update the score
-        scoreText.text = $"Score: {score}"; // Update score display
+        score += value;                 // updatne skóre
+        scoreText.text = $"Score: {score}"; // updatne displej
     }
 
     private void FixedUpdate()
@@ -147,8 +162,8 @@ public class GameManager : MonoBehaviour
     {
         if (lapStarted && !lapEnded)
         {
-            raceTimer += Time.deltaTime; // Increment the timer
-            timerText.text = $"Time: {raceTimer:F2}s"; // Update timer display
+            raceTimer += Time.deltaTime; // Incrementuje timer
+            timerText.text = $"Time: {raceTimer:F2}s"; // Updatne displej
         }
     }
 
@@ -164,12 +179,10 @@ public class GameManager : MonoBehaviour
         while (countdownTime > 0)
         {
             countdownText.text = countdownTime.ToString(); // Zobraz aktuálny čas
-            //Debug.Log(countdownTime);
             yield return new WaitForSeconds(1);           // Počkaj 1 sekundu
             countdownTime--;                              // Zníž čas o 1
         }
         
-        //Debug.Log("Go!");
         EnableControllers();
         StartCoroutine(GoTextCountdown());
     }
@@ -178,7 +191,7 @@ public class GameManager : MonoBehaviour
     {
         countdownText.text = "GO!"; 
         yield return new WaitForSeconds(1); 
-        countdownText.text = "";                       // Zobraz správu po odpočítaní
+        countdownText.text = "";                       
     }
 
     public void StartLap()
@@ -186,8 +199,8 @@ public class GameManager : MonoBehaviour
         if (!lapStarted)
         {
             lapStarted = true;
-            raceTimer = 0f;           // Reset timer when the race starts
-            timerText.text = "Time: 0.00s"; // Reset UI text
+            raceTimer = 0f;           
+            timerText.text = "Time: 0.00s";
         }
     }
 
@@ -196,8 +209,41 @@ public class GameManager : MonoBehaviour
         if (!lapEnded)
         {
             lapEnded = true;
-            Debug.Log($"Race Ended! Total Time: {raceTimer:F2} seconds");
             timerText.text = $"Final Time: {raceTimer:F2}s";
+
+            // Uloží na firebase
+            SaveRaceData(SceneManager.GetActiveScene().name, score, raceTimer);
         }
+    }
+
+    private void SaveRaceData(string level, int score, float time)
+    {
+        if (databaseReference == null)
+        {
+            Debug.LogError("Database reference not initialized.");
+            return;
+        }
+
+        string userId = System.Guid.NewGuid().ToString(); 
+
+        Dictionary<string, object> raceData = new Dictionary<string, object>
+        {
+            { "level", level },
+            { "score", score },
+            { "time", time },
+            { "date", System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") }
+        };
+
+        databaseReference.Child("races").Child(userId).SetValueAsync(raceData).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Race data saved successfully!");
+            }
+            else
+            {
+                Debug.LogError($"Failed to save race data: {task.Exception}");
+            }
+        });
     }
 }
