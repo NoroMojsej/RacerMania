@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
-    private bool raceStarted = false;
-    private bool raceEnded = false;
+    //private bool raceStarted = false;
+    //private bool raceEnded = false;
 
     public int finishLineCrossCount = 2;
 

@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
     {
         vehicleSpeed = car.speed;
         updateNeedle();
+    }
 
+    void Update()
+    {
         if (raceStarted && !raceEnded)
         {
             raceTimer += Time.deltaTime; // Increment the timer

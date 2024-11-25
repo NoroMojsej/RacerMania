@@ -14,7 +14,7 @@ public class Controller : MonoBehaviour
     public float speed;
     public float maxSpeed = 80;
     public float brakePower = 3000;
-    private float radius = 6f;
+    //private float radius = 6f;
     public float DownForceValue = 1000;
     public float motorTorque = 1000;
     public float steeringMax = 5;
