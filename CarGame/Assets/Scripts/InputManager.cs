@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    internal enum driver
+    public enum driver
     {
         AI,
         User
     }
 
-    [SerializeField] private driver driveController;
+    [SerializeField] public driver driveController;
     
     [Range (0,10)]public int distanceOffset = 1;
     [Range (0,5)]public float sterrForce = 2;
@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     public List<Transform> nodes;
     public Transform currentWaypoint;
     public Transform previousWaypoint;
+    public int passedWaypoints = 0;
     
     private void Start()
     {
@@ -85,9 +86,12 @@ public class InputManager : MonoBehaviour
                 else
                 {
                     currentWaypoint = nodes[i + distanceOffset];
+                    
+                    passedWaypoints = i + distanceOffset;
                 }
                 distance = currentDistance;
                 
+
             }
         }
     }

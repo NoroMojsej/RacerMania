@@ -23,12 +23,12 @@ public class Controller : MonoBehaviour
     public int finishLineCrossCount = 0;
     public bool hasFinished = false;
     public bool isEnabled = false;
+    public string name;
     
  
     void Start()
     {
         getObjects();
-        
     }
 
     private void FixedUpdate()

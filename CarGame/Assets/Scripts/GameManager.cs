@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Controller car;              // Reference to the player's car
+    public GameObject carObject;
     public GameObject needle;           // Reference to the needle for the speedometer
     public TextMeshProUGUI timerText;   // Reference to the Timer UI TextMeshPro component
     public TextMeshProUGUI scoreText;
-    private float startPosition = 227f, endPosition = -52.5f, desiredPosition;
+    private float startPosition = 223f, endPosition = -52.5f, desiredPosition;
     public float vehicleSpeed;
 
     private bool lapStarted = false;
@@ -23,9 +26,14 @@ public class GameManager : MonoBehaviour
 
     public List<Controller> carControllers;
     private GameObject[] carObjects;
+    public List<Vehicle> vehicles;
+    public int currentPosition;
+    public TextMeshProUGUI positionText;
+    
+    public List<GameObject> allCars;
     void Start()
     {
-        SetCarControllers();
+        SetCarLists();
         
         raceTimer = 0f;                 
         timerText.text = "Time: 0.00s"; 
@@ -34,13 +42,20 @@ public class GameManager : MonoBehaviour
 
 
         StartCoroutine(StartCountdown());
+        StartCoroutine(SortVehiclesTimedLoop());
 
     }
 
-    private void SetCarControllers()
+    private void SetCarLists()
     {
         carControllers = new List<Controller>();
+        vehicles = new List<Vehicle>();
+        carObject = GameObject.FindWithTag("Player");
+        
         carControllers.Add(car);
+        allCars = new List<GameObject>();
+        allCars.Add(carObject);
+        vehicles.Add(new Vehicle(carObject.GetComponent<InputManager>().passedWaypoints, car.name, car.hasFinished, true));
         
         // Nájde všetky GameObjecty s daným tagom
         carObjects = GameObject.FindGameObjectsWithTag("NPC");
@@ -50,12 +65,65 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Found object: " + obj.name);
             carControllers.Add(obj.gameObject.GetComponent<Controller>());
+            
+            vehicles.Add(new Vehicle(obj.GetComponent<InputManager>().passedWaypoints, obj.gameObject.GetComponent<Controller>().name, 
+                obj.gameObject.GetComponent<Controller>().hasFinished, false));
+            
+            allCars.Add(obj);
+        }
+        
+    }
+
+    private void SortVehicles()
+    {
+        for (int i = 0; i < allCars.Count; i++) {
+            vehicles[i].hasFinished = allCars[i].GetComponent<Controller>().hasFinished;
+            vehicles[i].name = allCars[i].GetComponent<Controller> ().name;
+            vehicles[i].passedWaypoints = allCars[i].GetComponent<InputManager> ().passedWaypoints;
+            //vehicles[i].isPlayer = allCars[i].GetComponent<InputManager>().
+            if (allCars[i].GetComponent<InputManager>().driveController == InputManager.driver.User)
+            {
+                vehicles[i].isPlayer = true;
+            }
+            else
+            {
+                vehicles[i].isPlayer = false;
+            }
+        }
+        
+        for (int i = 0; i < vehicles.Count; i++) {
+            for (int j = i + 1; j < vehicles.Count; j++) {
+                if (vehicles[j].passedWaypoints < vehicles[i].passedWaypoints) {
+                    Vehicle QQ = vehicles[i];
+                    vehicles[i] = vehicles[j];
+                    vehicles[j] = QQ;
+                }
+            }                
+        }
+
+        for (int i = 0; i < vehicles.Count; i++)
+        {
+            //Debug.Log(i +" " +vehicles[i].passedWaypoints + " " + vehicles[i].name + " " + vehicles[i].hasFinished + " " +vehicles[i].isPlayer);
+
+            if (vehicles[i].isPlayer)
+            {
+                currentPosition = vehicles.Count-i;
+                positionText.text = currentPosition + "/" + vehicles.Count; 
+            }
+        }
+
+        //Debug.Log("---------------------------------------------------------------");
+    }
+    
+    private IEnumerator SortVehiclesTimedLoop () {
+        while (true) {
+            yield return new WaitForSeconds (1);
+            SortVehicles ();
         }
     }
 
     private void EnableControllers()
     {
-        //Debug.Log("GO!");
         foreach (Controller con in carControllers)
         {
             con.isEnabled = true;
@@ -100,15 +168,10 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1);           // Počkaj 1 sekundu
             countdownTime--;                              // Zníž čas o 1
         }
-
-        //countdownText.text = "GO!";                       // Zobraz správu po odpočítaní
         
-        //OnCountdownFinished();                            // Voliteľná metóda po dokončení
-
         //Debug.Log("Go!");
         EnableControllers();
         StartCoroutine(GoTextCountdown());
-        //countdownText.text = "";
     }
     
     IEnumerator GoTextCountdown()

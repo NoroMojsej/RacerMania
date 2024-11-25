@@ -366,6 +366,7 @@
 "Assets/Scripts/PickUp/PickUpBlue.cs"
 "Assets/Scripts/PickUp/PickUpGreen.cs"
 "Assets/Scripts/ResetOnDeath.cs"
+"Assets/Scripts/Vehicle.cs"
 -langversion:9.0
 /deterministic
 /optimize+

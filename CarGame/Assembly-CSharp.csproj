@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ResetOnDeath.cs" />
     <Compile Include="Assets\Scripts\CarEngineSound.cs" />
+    <Compile Include="Assets\Scripts\Vehicle.cs" />
     <Compile Include="Assets\Scripts\PickUp\PickUpBlue.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
