@@ -9419,7 +9419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
       propertyPath: maxSpeed
-      value: 95
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 9162903792538794579, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
       propertyPath: sterrForce
@@ -43032,7 +43032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7212317740025815040, guid: eeecc2ef6aed66f4684be28c2b34c0cb, type: 3}
       propertyPath: maxSpeed
-      value: 85
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
