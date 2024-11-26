@@ -363,6 +363,7 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/gizmos.cs"
 "Assets/Scripts/InputManager.cs"
+"Assets/Scripts/menuManager.cs"
 "Assets/Scripts/PickUp/PickUpBlue.cs"
 "Assets/Scripts/PickUp/PickUpGreen.cs"
 "Assets/Scripts/ResetOnDeath.cs"
