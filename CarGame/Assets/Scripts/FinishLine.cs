@@ -13,6 +13,7 @@ public class FinishLine : MonoBehaviour
         {
             Controller controller = other.GetComponent<Controller>();
             controller.finishLineCrossCount += 1;
+            //int finalPosition = 0;
             if (other.CompareTag("Player") && controller.finishLineCrossCount == 1)
             {
                 Debug.Log("Race started for player.");
@@ -22,12 +23,16 @@ public class FinishLine : MonoBehaviour
             {
                 Debug.Log("Race ended for player.");
                 controller.hasFinished = true;
+                gameManager.finalPosition++;
+                controller.finalPosition = gameManager.finalPosition;
                 gameManager.EndLap();
             }
             else if (other.CompareTag("NPC") && controller.finishLineCrossCount == finishLineCrossCount)
             {
                 Debug.Log("Race ended for npc.");
                 controller.hasFinished = true;
+                gameManager.finalPosition++;
+                controller.finalPosition = gameManager.finalPosition;
             }
 
         }

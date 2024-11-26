@@ -13,8 +13,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public driver driveController;
     
-    [Range (0,10)]public int distanceOffset = 1;
-    [Range (0,5)]public float sterrForce = 2;
+    private int distanceOffset = 1;
+    private float sterrForce = 2;
     
     public float vertical;
     public float horizontal;
@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     public Transform currentWaypoint;
     public Transform previousWaypoint;
     public int passedWaypoints = 0;
+    
     
     private void Start()
     {
@@ -89,6 +90,7 @@ public class InputManager : MonoBehaviour
                     
                     passedWaypoints = i + distanceOffset;
                 }
+                
                 distance = currentDistance;
                 
 

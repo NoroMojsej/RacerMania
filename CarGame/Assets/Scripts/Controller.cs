@@ -24,6 +24,7 @@ public class Controller : MonoBehaviour
     public bool hasFinished = false;
     public bool isEnabled = false;
     public string name;
+    public int finalPosition;
     
  
     void Start()

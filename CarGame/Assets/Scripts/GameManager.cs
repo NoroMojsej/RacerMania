@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI positionText;
 
     public List<GameObject> allCars;
+    public int finalPosition = 0;
 
     private DatabaseReference databaseReference;
 
@@ -231,7 +232,7 @@ public class GameManager : MonoBehaviour
         // Format the final result text
         finalResultText.text = $"Final Time: {raceTimer:F2}s\n" +
                                $"Score: {score}\n" +
-                               $"Position: {currentPosition}/{vehicles.Count}";
+                               $"Position: {car.finalPosition}/{vehicles.Count}";
 
         // Optionally hide other UI elements such as the timer and score
         timerText.gameObject.SetActive(false);
